@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Runner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-layer">
+            <div id="score-board">
+                <div class="score-item">Verbs: <span id="verb-count">0</span></div>
+                <div class="score-item">Nouns: <span id="noun-count">0</span></div>
+                <div class="score-item">Adjectives: <span id="adj-count">0</span></div>
+            </div>
+            <div id="start-screen">
+                <h1>Word Runner</h1>
+                <p>Collect an equal amount of Verbs, Nouns, and Adjectives!</p>
+                <div class="control-group">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="A1">A1 (Beginner)</option>
+                        <option value="A2">A2 (Elementary)</option>
+                        <option value="B1">B1 (Intermediate)</option>
+                        <option value="B2">B2 (Upper-Intermediate)</option>
+                        <option value="C1">C1 (Advanced)</option>
+                        <option value="C2">C2 (Proficiency)</option>
+                    </select>
+                </div>
+                <button id="start-btn">Start Game</button>
+            </div>
+            <div id="game-over-screen" class="hidden">
+                <h1>Game Over</h1>
+                <p id="final-score"></p>
+                <button id="restart-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>

@@ -88,21 +88,14 @@ class WordPool {
     }
 
     getWord(difficulty, type, timeFrame = 'present') {
-        // Handle verbs with time frame
-        if (type === 'verbs') {
-            if (this.pools[difficulty][type][timeFrame].length === 0) {
-                this.pools[difficulty][type][timeFrame] = [...WORD_DATA[difficulty][type][timeFrame]];
-                this.shuffleArray(this.pools[difficulty][type][timeFrame]);
-            }
-            return this.pools[difficulty][type][timeFrame].pop();
-        }
-        
-        // Handle other word types (nouns, adjectives, days, months)
+        // If pool is empty, refill it with all words from that category
         if (this.pools[difficulty][type].length === 0) {
             this.pools[difficulty][type] = [...WORD_DATA[difficulty][type]];
+            // Shuffle the pool
             this.shuffleArray(this.pools[difficulty][type]);
         }
-        
+
+        // Pop and return a word from the pool
         return this.pools[difficulty][type].pop();
     }
 

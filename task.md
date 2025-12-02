@@ -22,6 +22,7 @@
     - [x] Expand Word Data (Days, Months)
     - [x] Implement context-aware spawning (Words match time frame?)
     - [x] Implement non-repeating word pool system
+    - [x] Fix WordPool.getWord() bug with verb tenses
 
 - [ ] **Game Logic**
     - [ ] Track collection counts (Verbs, Nouns, Adjectives, Days, Months)

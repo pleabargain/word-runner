@@ -21,4 +21,8 @@ This file defines the operating rules for the agent in this workspace.
 
 6. **Testing and Debugging**
    - If an error appears in the console, create a unit test to isolate the bug before fixing it.
-   - Unit tests should demonstrate both the buggy behavior and the fixed behavior. 
+   - Unit tests should demonstrate both the buggy behavior and the fixed behavior.
+
+7. **Array Management**
+   - When working with arrays, alphabetize them by default unless there's a specific reason to maintain a different order.
+   - This applies to arrays of strings, objects with string properties, and any other array structures where alphabetical ordering makes sense. 

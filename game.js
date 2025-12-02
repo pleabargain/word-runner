@@ -95,7 +95,7 @@ const BUILDING_ASSOCIATIONS = {
         verbs: ['Cook', 'Eat', 'Enjoy', 'Order', 'pay', 'Serve', 'Share', 'sit', 'Taste']
     },
     'City Hall': {
-        nouns: ['Mayor', 'Meeting', 'Document', 'Certificate', 'Office', 'Council', 'Law', 'Record'],
+        nouns: ['Bureaucracy', 'Certificate', 'Council', 'Document', 'Law', 'Mayor', 'Meeting', 'Office', 'Politician', 'Record', 'Red-tape', 'Regulation'],
         verbs: ['Govern', 'argue','Meet', 'Decide', 'Vote', 'Register', 'Apply', 'Attend']
     },
     'Coffee Shop': {

@@ -53,6 +53,45 @@ canvas {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+#time-frame-display {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+#time-frame-label {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#time-frame-label.past {
+    color: #d4a574;
+    border-color: #8b6f47;
+    box-shadow: 0 0 15px rgba(139, 111, 71, 0.5);
+}
+
+#time-frame-label.present {
+    color: #4a90e2;
+    border-color: #4a90e2;
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+#time-frame-label.future {
+    color: #00ffff;
+    border-color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
 #start-screen,
 #game-over-screen {
     position: absolute;

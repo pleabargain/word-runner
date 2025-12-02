@@ -131,21 +131,21 @@ class TimeFrame {
                     sky: '#3d2817',      // Dark sepia/brown
                     floor: '#5c4033',    // Sepia brown
                     grid: '#8b6f47',     // Light sepia
-                    name: 'Past'
+                    name: 'PAST'
                 };
             case 'present':
                 return {
                     sky: '#0d0d20',      // Original dark blue
                     floor: '#2a2a2a',    // Original gray
                     grid: '#4a90e2',     // Original blue
-                    name: 'Present'
+                    name: 'PRESENT'
                 };
             case 'future':
                 return {
                     sky: '#0a1628',      // Deep blue
                     floor: '#1a2f4a',    // Blue-gray
                     grid: '#00ffff',     // Cyan/neon
-                    name: 'Future'
+                    name: 'FUTURE'
                 };
             default:
                 return this.getColors.call({ type: 'present' });
@@ -236,6 +236,134 @@ class Word {
     }
 }
 
+class Building {
+    constructor(game, z, side) {
+        this.game = game;
+        this.z = z; // Distance along the road
+        this.side = side; // 'left' or 'right'
+        
+        // Building names pool
+        const buildingNames = [
+            'Train Station',
+            'Doctor\'s Office',
+            'Grocery Store',
+            'Post Office',
+            'Library',
+            'School',
+            'Bank',
+            'Restaurant',
+            'Hotel',
+            'Hospital',
+            'Police Station',
+            'Fire Station',
+            'City Hall',
+            'Museum',
+            'Theater',
+            'Park',
+            'Coffee Shop',
+            'Pharmacy',
+            'Bookstore',
+            'Hardware Store'
+        ];
+        
+        this.name = buildingNames[Math.floor(Math.random() * buildingNames.length)];
+        
+        // Building dimensions
+        this.width = 200 + Math.random() * 150; // 200-350 units wide
+        this.height = 300 + Math.random() * 200; // 300-500 units tall
+        
+        this.markedForDeletion = false;
+    }
+
+    update(deltaTime) {
+        this.z -= this.game.speed * (deltaTime / 1000);
+
+        if (this.z < -100) {
+            this.markedForDeletion = true;
+        }
+    }
+
+    draw(ctx) {
+        if (this.z <= 10) return;
+
+        const fov = 300;
+        const cameraHeight = 150;
+        const scale = fov / this.z;
+
+        const vpX = this.game.width / 2;
+        const vpY = this.game.height * 0.4;
+
+        // Position buildings on the sides of the road
+        // Use wider spacing than words to place them off the road
+        const roadWidth = 500; // Width of the road
+        const buildingOffset = roadWidth / 2 + 100; // Distance from center to building
+        
+        const worldX = this.side === 'left' ? -buildingOffset : buildingOffset;
+        const worldY = 0; // Buildings sit on the ground
+
+        const screenX = vpX + (worldX * scale);
+        const baseY = vpY + (cameraHeight * scale);
+        const screenY = baseY - (this.height * scale);
+        const screenWidth = this.width * scale;
+        const screenHeight = this.height * scale;
+
+        // Don't draw if off screen
+        if (screenX + screenWidth < 0 || screenX > this.game.width) return;
+        if (screenY + screenHeight < 0 || baseY > this.game.height) return;
+
+        // Draw building with distinct colors
+        // Use a variety of building colors for visual interest
+        const buildingColors = [
+            { fill: '#8B4513', stroke: '#654321' },  // Brown
+            { fill: '#708090', stroke: '#556B2F' },  // Slate gray
+            { fill: '#4682B4', stroke: '#2F4F4F' }, // Steel blue
+            { fill: '#CD853F', stroke: '#8B7355' }, // Peru
+            { fill: '#696969', stroke: '#2F2F2F' },  // Dim gray
+            { fill: '#778899', stroke: '#4F4F4F' }   // Light slate gray
+        ];
+        const buildingColor = buildingColors[Math.floor(this.name.length % buildingColors.length)];
+        
+        ctx.fillStyle = buildingColor.fill;
+        ctx.globalAlpha = 0.8;
+        ctx.fillRect(screenX, screenY, screenWidth, screenHeight);
+        
+        // Draw building outline
+        ctx.strokeStyle = buildingColor.stroke;
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = 1;
+        ctx.strokeRect(screenX, screenY, screenWidth, screenHeight);
+
+        // Draw building label - bold and easy to read
+        const fontSize = Math.max(14, Math.min(26, 32 * scale));
+        ctx.font = `bold ${fontSize}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        
+        // Label background for readability with stronger contrast
+        const labelY = screenY - fontSize - 8;
+        const textMetrics = ctx.measureText(this.name);
+        const labelWidth = textMetrics.width + 16;
+        const labelHeight = fontSize + 8;
+        
+        // Dark background with border for better readability
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+        ctx.fillRect(screenX + screenWidth / 2 - labelWidth / 2, labelY, labelWidth, labelHeight);
+        
+        // White border around label
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(screenX + screenWidth / 2 - labelWidth / 2, labelY, labelWidth, labelHeight);
+        
+        // Label text - bold white for maximum readability
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `bold ${fontSize}px Arial`;
+        ctx.fillText(this.name, screenX + screenWidth / 2, labelY + 4);
+        
+        // Reset alpha
+        ctx.globalAlpha = 1;
+    }
+}
+
 class Player {
     constructor(game) {
         this.game = game;
@@ -302,6 +430,10 @@ class Game {
         this.wordTimer = 0;
         this.wordInterval = 2000;
 
+        this.buildings = [];
+        this.buildingTimer = 0;
+        this.buildingInterval = 1500; // Spawn buildings more frequently than words
+
         this.score = {
             verbs: 0,
             nouns: 0,
@@ -331,6 +463,7 @@ class Game {
         });
 
         this.resize();
+        this.updateTimeFrameDisplay();
     }
 
     resize() {
@@ -360,6 +493,7 @@ class Game {
         this.score = { verbs: 0, nouns: 0, adjectives: 0, days: 0, months: 0 };
         this.distance = 0;
         this.words = [];
+        this.buildings = [];
         this.wordPool.reset();
         this.currentTimeFrameIndex = 1;
         this.currentTimeFrame = 'present';
@@ -367,6 +501,7 @@ class Game {
         this.nextBlockDistance = this.blockLength;
         this.player.x = this.width / 2 - this.player.width / 2;
         this.updateScoreDisplay();
+        this.updateTimeFrameDisplay();
         this.start();
     }
 
@@ -395,6 +530,16 @@ class Game {
             this.currentTimeFrame = this.timeFrames[this.currentTimeFrameIndex];
             this.timeFrame = new TimeFrame(this.currentTimeFrame);
             this.nextBlockDistance += this.blockLength;
+            this.updateTimeFrameDisplay();
+        }
+    }
+
+    updateTimeFrameDisplay() {
+        const timeFrameLabel = document.getElementById('time-frame-label');
+        if (timeFrameLabel) {
+            timeFrameLabel.textContent = this.timeFrame.colors.name;
+            // Update CSS class for styling
+            timeFrameLabel.className = this.currentTimeFrame;
         }
     }
 
@@ -429,8 +574,27 @@ class Game {
             this.wordTimer = 0;
         }
 
+        // Spawn buildings
+        this.buildingTimer += deltaTime;
+        if (this.buildingTimer > this.buildingInterval) {
+            // Spawn buildings on both sides, staggered
+            const spawnZ = 2000;
+            const side = Math.random() > 0.5 ? 'left' : 'right';
+            this.buildings.push(new Building(this, spawnZ, side));
+            
+            // Sometimes spawn on both sides
+            if (Math.random() > 0.6) {
+                this.buildings.push(new Building(this, spawnZ + 200, side === 'left' ? 'right' : 'left'));
+            }
+            
+            this.buildingTimer = 0;
+        }
+
         this.words.forEach(word => word.update(deltaTime));
         this.words = this.words.filter(word => !word.markedForDeletion);
+
+        this.buildings.forEach(building => building.update(deltaTime));
+        this.buildings = this.buildings.filter(building => !building.markedForDeletion);
 
         this.player.update(deltaTime, this.input);
 
@@ -443,14 +607,18 @@ class Game {
 
         const horizonY = this.height * 0.4;
 
-        // Use time frame colors
-        this.ctx.fillStyle = this.timeFrame.colors.sky;
+        // Fixed cityscape colors (always use present colors)
+        const skyColor = '#0d0d20';      // Dark blue
+        const floorColor = '#2a2a2a';    // Gray
+        const gridColor = '#4a90e2';     // Blue
+
+        this.ctx.fillStyle = skyColor;
         this.ctx.fillRect(0, 0, this.width, horizonY);
 
-        this.ctx.fillStyle = this.timeFrame.colors.floor;
+        this.ctx.fillStyle = floorColor;
         this.ctx.fillRect(0, horizonY, this.width, this.height - horizonY);
 
-        this.ctx.strokeStyle = this.timeFrame.colors.grid;
+        this.ctx.strokeStyle = gridColor;
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();
 
@@ -484,8 +652,10 @@ class Game {
 
         this.ctx.stroke();
 
-        this.words.sort((a, b) => b.z - a.z);
-        this.words.forEach(word => word.draw(this.ctx));
+        // Draw buildings and words sorted by depth
+        const allObjects = [...this.buildings, ...this.words];
+        allObjects.sort((a, b) => b.z - a.z);
+        allObjects.forEach(obj => obj.draw(this.ctx));
 
         this.player.draw(this.ctx);
 

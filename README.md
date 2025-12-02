@@ -1,3 +1,4 @@
+<!-- https://github.com/pleabargain/word-runner -->
 # Word Runner
 
 **Last Updated:** 2025-12-02T14:09:58+04:00

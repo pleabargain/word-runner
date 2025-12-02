@@ -1,3 +1,4 @@
+<!-- https://github.com/pleabargain/word-runner -->
 # Agent Rules
 
 This file defines the operating rules for the agent in this workspace.

@@ -1,3 +1,4 @@
+<!-- https://github.com/pleabargain/word-runner -->
 # Project Description: Word Runner
 
 **Date:** 2025-12-02T13:55:12+04:00

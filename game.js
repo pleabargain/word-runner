@@ -1,3 +1,4 @@
+// https://github.com/pleabargain/word-runner
 const WORD_DATA = {
     A1: {
         verbs: ['Run', 'Jump', 'Eat', 'Sleep', 'Walk'],

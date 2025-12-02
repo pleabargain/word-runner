@@ -87,7 +87,7 @@ class WordPool {
         });
     }
 
-    getWord(difficulty, type) {
+    getWord(difficulty, type, timeFrame = 'present') {
         // If pool is empty, refill it with all words from that category
         if (this.pools[difficulty][type].length === 0) {
             this.pools[difficulty][type] = [...WORD_DATA[difficulty][type]];

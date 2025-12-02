@@ -17,4 +17,8 @@ This file defines the operating rules for the agent in this workspace.
    - Do not delete or destroy functionality without asking the user first.
 
 5. **Documentation**
-   - Maintain a `README.md` file that describes the project and includes a datestamp. 
+   - Maintain a `README.md` file that describes the project and includes a datestamp.
+
+6. **Testing and Debugging**
+   - If an error appears in the console, create a unit test to isolate the bug before fixing it.
+   - Unit tests should demonstrate both the buggy behavior and the fixed behavior. 

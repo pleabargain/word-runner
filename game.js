@@ -75,7 +75,7 @@ const BUILDING_ASSOCIATIONS = {
         verbs: ['Deposit', 'Withdraw', 'Save', 'Borrow', 'Invest', 'Transfer', 'Count']
     },
     'Bathroom': {
-        nouns: ['Sink', 'Mirror', 'Towel', 'Shower', 'Toilet', 'Soap', 'Toothbrush', 'Toothpaste'],
+        nouns: ['Sink', 'Mirror', 'Towel','shampoo', 'conditioner', 'lotion', 'Shower', 'Toilet', 'Soap', 'Toothbrush', 'Toothpaste'],
         verbs: ['Wash', 'Shower', 'Brush', 'Flush', 'Dry', 'Clean', 'Use']
     },
     'Bedroom': {

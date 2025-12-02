@@ -78,13 +78,17 @@ const BUILDING_ASSOCIATIONS = {
         nouns: ['Book', 'Novel', 'Magazine', 'Shelf', 'Author', 'Story', 'Page', 'Cover'],
         verbs: ['Read', 'Browse', 'Purchase', 'Search', 'Recommend', 'Select', 'Buy']
     },
+    'Burger Place': {
+        nouns: ['Burger', 'Patty', 'Bun', 'Fries', 'Ketchup', 'Pickle', 'Onion', 'Menu'],
+        verbs: ['Order', 'Eat', 'Grill', 'Serve', 'Enjoy', 'Pay', 'Share']
+    },
     'Chinese Restaurant': {
         nouns: ['Noodles', 'Rice', 'Dumpling', 'Sauce', 'Chopstick', 'Menu', 'Table', 'Dish'],
-        verbs: ['Eat', 'Order', 'Cook', 'Serve', 'Taste', 'Enjoy', 'Share']
+        verbs: ['Eat', 'Order','pay', 'sit', 'Cook', 'Serve', 'Taste', 'Enjoy', 'Share']
     },
     'City Hall': {
         nouns: ['Mayor', 'Meeting', 'Document', 'Certificate', 'Office', 'Council', 'Law', 'Record'],
-        verbs: ['Govern', 'Meet', 'Decide', 'Vote', 'Register', 'Apply', 'Attend']
+        verbs: ['Govern', 'argue','Meet', 'Decide', 'Vote', 'Register', 'Apply', 'Attend']
     },
     'Coffee Shop': {
         nouns: ['Coffee', 'Espresso', 'Latte', 'Cup', 'Bean', 'Barista', 'Pastry', 'Table'],
@@ -149,6 +153,10 @@ const BUILDING_ASSOCIATIONS = {
     'Pharmacy': {
         nouns: ['Medicine', 'Prescription', 'Pill', 'Pharmacist', 'Health', 'Vitamin', 'Bandage', 'Advice'],
         verbs: ['Fill', 'Purchase', 'Consult', 'Pick Up', 'Advise', 'Recommend', 'Buy']
+    },
+    'Pizza Place': {
+        nouns: ['Pizza', 'Slice', 'Crust', 'Topping', 'Cheese', 'Pepperoni', 'Oven', 'Menu'],
+        verbs: ['Order', 'Eat', 'Slice', 'Deliver', 'Share', 'Enjoy', 'Pay']
     },
     'Police Station': {
         nouns: ['Officer', 'Badge', 'Report', 'Crime', 'Evidence', 'Patrol', 'Law', 'Safety'],
@@ -419,50 +427,35 @@ class Building {
         ctx.globalAlpha = 1;
         ctx.strokeRect(screenX, screenY, screenWidth, screenHeight);
 
-        // Draw building label with associations - bold and easy to read
-        const nameFontSize = Math.max(14, Math.min(26, 32 * scale));
-        const assocFontSize = Math.max(10, Math.min(18, 22 * scale));
-        ctx.font = `bold ${nameFontSize}px Arial`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
+        // Draw text inside the building frame
+        const nameFontSize = Math.max(10, Math.min(20, 24 * scale));
+        const assocFontSize = Math.max(8, Math.min(14, 16 * scale));
         
-        // Calculate label dimensions
-        const nameMetrics = ctx.measureText(this.name);
+        // Prepare text
         const nounsText = 'NOUNS: ' + this.associations.nouns.slice(0, 3).join(', ');
         const verbsText = 'VERBS: ' + this.associations.verbs.slice(0, 3).join(', ');
         
-        ctx.font = `${assocFontSize}px Arial`;
-        const nounsMetrics = ctx.measureText(nounsText);
-        const verbsMetrics = ctx.measureText(verbsText);
+        // Calculate total text height
+        const totalTextHeight = nameFontSize + assocFontSize * 2 + 8; // Name + 2 lines + spacing
+        const textStartY = screenY + (screenHeight - totalTextHeight) / 2; // Center vertically
         
-        const maxTextWidth = Math.max(nameMetrics.width, nounsMetrics.width, verbsMetrics.width);
-        const labelWidth = maxTextWidth + 20;
-        const labelHeight = nameFontSize + assocFontSize * 2 + 20; // Name + 2 lines of associations + padding
+        // Add semi-transparent overlay for text readability
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(screenX + 4, textStartY - 4, screenWidth - 8, totalTextHeight + 8);
         
-        // Position label above building
-        const labelY = screenY - labelHeight - 8;
-        const labelX = screenX + screenWidth / 2 - labelWidth / 2;
-        
-        // Dark background with border for better readability
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-        ctx.fillRect(labelX, labelY, labelWidth, labelHeight);
-        
-        // White border around label
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(labelX, labelY, labelWidth, labelHeight);
-        
-        // Building name - bold white
+        // Building name - bold white, centered
         ctx.fillStyle = '#ffffff';
         ctx.font = `bold ${nameFontSize}px Arial`;
-        ctx.fillText(this.name, screenX + screenWidth / 2, labelY + 6);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText(this.name, screenX + screenWidth / 2, textStartY);
         
         // Associations text - smaller, lighter color
-        ctx.fillStyle = '#cccccc';
+        ctx.fillStyle = '#e0e0e0';
         ctx.font = `${assocFontSize}px Arial`;
-        let currentY = labelY + nameFontSize + 8;
+        let currentY = textStartY + nameFontSize + 4;
         ctx.fillText(nounsText, screenX + screenWidth / 2, currentY);
-        currentY += assocFontSize + 4;
+        currentY += assocFontSize + 2;
         ctx.fillText(verbsText, screenX + screenWidth / 2, currentY);
         
         // Reset alpha
@@ -544,6 +537,7 @@ class Game {
         this.buildingNames = [
             'Bank',
             'Bookstore',
+            'Burger Place',
             'Chinese Restaurant',
             'City Hall',
             'Coffee Shop',
@@ -562,6 +556,7 @@ class Game {
             'Park',
             'Parent\'s Place',
             'Pharmacy',
+            'Pizza Place',
             'Police Station',
             'Post Office',
             'Restaurant',

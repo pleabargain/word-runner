@@ -21,6 +21,7 @@
     - [ ] Implement color-coded city blocks
     - [ ] Expand Word Data (Days, Months)
     - [ ] Implement context-aware spawning (Words match time frame?)
+    - [x] Implement non-repeating word pool system
 
 - [ ] **Game Logic**
     - [ ] Track collection counts (Verbs, Nouns, Adjectives, Days, Months)

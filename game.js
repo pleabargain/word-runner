@@ -32,6 +32,47 @@ const WORD_DATA = {
     }
 };
 
+class WordPool {
+    constructor() {
+        this.pools = {};
+        this.initializePools();
+    }
+
+    initializePools() {
+        // Initialize pools for each difficulty level and word type
+        Object.keys(WORD_DATA).forEach(difficulty => {
+            this.pools[difficulty] = {
+                verbs: [],
+                nouns: [],
+                adjectives: []
+            };
+        });
+    }
+
+    getWord(difficulty, type) {
+        // If pool is empty, refill it with all words from that category
+        if (this.pools[difficulty][type].length === 0) {
+            this.pools[difficulty][type] = [...WORD_DATA[difficulty][type]];
+            // Shuffle the pool
+            this.shuffleArray(this.pools[difficulty][type]);
+        }
+
+        // Pop and return a word from the pool
+        return this.pools[difficulty][type].pop();
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    reset() {
+        this.initializePools();
+    }
+}
+
 class Word {
     constructor(game) {
         this.game = game;
@@ -68,8 +109,7 @@ class Word {
 
     getRandomWord(type) {
         const difficulty = this.game.difficulty || 'A1';
-        const list = WORD_DATA[difficulty][type];
-        return list[Math.floor(Math.random() * list.length)];
+        return this.game.wordPool.getWord(difficulty, type);
     }
 
     update(deltaTime) {
@@ -165,6 +205,7 @@ class Game {
         this.gridSize = 100;
         this.difficulty = 'A1';
 
+        this.wordPool = new WordPool();
         this.player = new Player(this);
         this.input = [];
 
@@ -228,6 +269,7 @@ class Game {
         this.score = { verbs: 0, nouns: 0, adjectives: 0 };
         this.distance = 0;
         this.words = [];
+        this.wordPool.reset();
         this.player.x = this.width / 2 - this.player.width / 2;
         this.updateScoreDisplay();
         this.start();

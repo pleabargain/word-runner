@@ -237,42 +237,11 @@ class Word {
 }
 
 class Building {
-    constructor(game, z, side) {
+    constructor(game, z, side, name) {
         this.game = game;
         this.z = z; // Distance along the road
         this.side = side; // 'left' or 'right'
-        
-        // Building names pool
-        const buildingNames = [
-            'Bank',
-            'Bookstore',
-            'Chinese Restaurant',
-            'City Hall',
-            'Coffee Shop',
-            'Doctor\'s Office',
-            'Fire Station',
-            'Friend\'s Place',
-            'Gas Station',
-            'Grocery Store',
-            'Hair Salon',
-            'Hardware Store',
-            'Hospital',
-            'Hotel',
-            'Kindergarten',
-            'Library',
-            'Museum',
-            'Park',
-            'Parent\'s Place',
-            'Pharmacy',
-            'Police Station',
-            'Post Office',
-            'Restaurant',
-            'School',
-            'Theater',
-            'Train Station'
-        ];
-        
-        this.name = buildingNames[Math.floor(Math.random() * buildingNames.length)];
+        this.name = name;
         
         // Building dimensions
         this.width = 200 + Math.random() * 150; // 200-350 units wide
@@ -440,6 +409,38 @@ class Game {
         this.buildingTimer = 0;
         this.buildingInterval = 1500; // Spawn buildings more frequently than words
 
+        // Building names pool - shuffled and used one at a time
+        this.buildingNames = [
+            'Bank',
+            'Bookstore',
+            'Chinese Restaurant',
+            'City Hall',
+            'Coffee Shop',
+            'Doctor\'s Office',
+            'Fire Station',
+            'Friend\'s Place',
+            'Gas Station',
+            'Grocery Store',
+            'Hair Salon',
+            'Hardware Store',
+            'Hospital',
+            'Hotel',
+            'Kindergarten',
+            'Library',
+            'Museum',
+            'Park',
+            'Parent\'s Place',
+            'Pharmacy',
+            'Police Station',
+            'Post Office',
+            'Restaurant',
+            'School',
+            'Theater',
+            'Train Station'
+        ];
+        this.buildingNamePool = [];
+        this.initializeBuildingNamePool();
+
         this.score = {
             verbs: 0,
             nouns: 0,
@@ -472,6 +473,28 @@ class Game {
         this.updateTimeFrameDisplay();
     }
 
+    initializeBuildingNamePool() {
+        // Create a shuffled copy of building names
+        this.buildingNamePool = [...this.buildingNames];
+        this.shuffleArray(this.buildingNamePool);
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    getNextBuildingName() {
+        // If pool is empty, reshuffle and refill
+        if (this.buildingNamePool.length === 0) {
+            this.initializeBuildingNamePool();
+        }
+        // Return and remove the first name from the pool
+        return this.buildingNamePool.shift();
+    }
+
     resize() {
         this.width = this.canvas.width = window.innerWidth;
         this.height = this.canvas.height = window.innerHeight;
@@ -501,6 +524,7 @@ class Game {
         this.words = [];
         this.buildings = [];
         this.wordPool.reset();
+        this.initializeBuildingNamePool(); // Reset building name pool
         this.currentTimeFrameIndex = 1;
         this.currentTimeFrame = 'present';
         this.timeFrame = new TimeFrame(this.currentTimeFrame);
@@ -586,11 +610,14 @@ class Game {
             // Spawn buildings on both sides, staggered
             const spawnZ = 2000;
             const side = Math.random() > 0.5 ? 'left' : 'right';
-            this.buildings.push(new Building(this, spawnZ, side));
+            const buildingName = this.getNextBuildingName();
+            this.buildings.push(new Building(this, spawnZ, side, buildingName));
             
             // Sometimes spawn on both sides
             if (Math.random() > 0.6) {
-                this.buildings.push(new Building(this, spawnZ + 200, side === 'left' ? 'right' : 'left'));
+                const otherSide = side === 'left' ? 'right' : 'left';
+                const otherBuildingName = this.getNextBuildingName();
+                this.buildings.push(new Building(this, spawnZ + 200, otherSide, otherBuildingName));
             }
             
             this.buildingTimer = 0;

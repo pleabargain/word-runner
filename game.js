@@ -228,6 +228,84 @@ const BUILDING_ASSOCIATIONS = {
     }
 };
 
+// Function to enrich BUILDING_ASSOCIATIONS with modal verbs, famous people, and cities
+function enrichBuildingAssociations() {
+    // Modal verbs
+    const modalVerbs = ['can', 'could', 'may', 'might', 'must', 'shall', 'should', 'will', 'would'];
+    
+    // Famous people
+    const famousPeople = [
+        'Einstein', 'Shakespeare', 'Mozart', 'Picasso', 'Newton', 'Darwin', 'Galileo', 
+        'Da Vinci', 'Napoleon', 'Gandhi', 'Mandela', 'Lincoln', 'Churchill', 'Einstein',
+        'Curie', 'Tesla', 'Edison', 'Jobs', 'Gates', 'Beethoven', 'Bach', 'Van Gogh',
+        'Michelangelo', 'Plato', 'Aristotle', 'Socrates', 'Confucius', 'Buddha', 'Jesus',
+        'Muhammad', 'Cleopatra', 'Caesar', 'Alexander', 'Washington', 'Roosevelt', 'Kennedy'
+    ];
+    
+    // Famous cities with countries
+    const famousCities = [
+        { city: 'Paris', country: 'France' },
+        { city: 'London', country: 'United Kingdom' },
+        { city: 'Tokyo', country: 'Japan' },
+        { city: 'New York', country: 'United States' },
+        { city: 'Rome', country: 'Italy' },
+        { city: 'Berlin', country: 'Germany' },
+        { city: 'Madrid', country: 'Spain' },
+        { city: 'Moscow', country: 'Russia' },
+        { city: 'Beijing', country: 'China' },
+        { city: 'Cairo', country: 'Egypt' },
+        { city: 'Sydney', country: 'Australia' },
+        { city: 'Rio de Janeiro', country: 'Brazil' },
+        { city: 'Dubai', country: 'United Arab Emirates' },
+        { city: 'Bangkok', country: 'Thailand' },
+        { city: 'Mumbai', country: 'India' },
+        { city: 'Istanbul', country: 'Turkey' },
+        { city: 'Amsterdam', country: 'Netherlands' },
+        { city: 'Vienna', country: 'Austria' },
+        { city: 'Prague', country: 'Czech Republic' },
+        { city: 'Athens', country: 'Greece' },
+        { city: 'Stockholm', country: 'Sweden' },
+        { city: 'Oslo', country: 'Norway' },
+        { city: 'Copenhagen', country: 'Denmark' },
+        { city: 'Warsaw', country: 'Poland' },
+        { city: 'Budapest', country: 'Hungary' },
+        { city: 'Lisbon', country: 'Portugal' },
+        { city: 'Dublin', country: 'Ireland' },
+        { city: 'Edinburgh', country: 'Scotland' },
+        { city: 'Barcelona', country: 'Spain' },
+        { city: 'Venice', country: 'Italy' }
+    ];
+    
+    // Enrich each building's associations
+    Object.keys(BUILDING_ASSOCIATIONS).forEach(buildingName => {
+        const building = BUILDING_ASSOCIATIONS[buildingName];
+        
+        // Add a random modal verb to verbs array (insert at beginning to ensure visibility)
+        const randomModalVerb = modalVerbs[Math.floor(Math.random() * modalVerbs.length)];
+        if (!building.verbs.includes(randomModalVerb)) {
+            building.verbs.unshift(randomModalVerb); // Add to beginning instead of end
+        }
+        
+        // Add a random famous person to nouns array (insert at beginning to ensure visibility)
+        const randomPerson = famousPeople[Math.floor(Math.random() * famousPeople.length)];
+        if (!building.nouns.includes(randomPerson)) {
+            building.nouns.unshift(randomPerson); // Add to beginning instead of end
+        }
+        
+        // Add a random famous city and country to nouns array (insert at beginning to ensure visibility)
+        const randomCity = famousCities[Math.floor(Math.random() * famousCities.length)];
+        if (!building.nouns.includes(randomCity.city)) {
+            building.nouns.unshift(randomCity.city); // Add to beginning instead of end
+        }
+        if (!building.nouns.includes(randomCity.country)) {
+            building.nouns.unshift(randomCity.country); // Add to beginning instead of end
+        }
+    });
+}
+
+// Call the function to enrich associations
+enrichBuildingAssociations();
+
 class WordPool {
     constructor() {
         this.pools = {};
@@ -471,36 +549,111 @@ class Building {
         ctx.globalAlpha = 1;
         ctx.strokeRect(screenX, screenY, screenWidth, screenHeight);
 
-        // Draw text inside the building frame
-        const nameFontSize = Math.max(10, Math.min(20, 24 * scale));
-        const assocFontSize = Math.max(8, Math.min(14, 16 * scale));
+        // Draw text inside the building frame - new layout format
+        // Extract famous person and modal verb
+        const modalVerbs = ['can', 'could', 'may', 'might', 'must', 'shall', 'should', 'will', 'would'];
+        const famousPeople = [
+            'Einstein', 'Shakespeare', 'Mozart', 'Picasso', 'Newton', 'Darwin', 'Galileo', 
+            'Da Vinci', 'Napoleon', 'Gandhi', 'Mandela', 'Lincoln', 'Churchill', 'Curie', 
+            'Tesla', 'Edison', 'Jobs', 'Gates', 'Beethoven', 'Bach', 'Van Gogh',
+            'Michelangelo', 'Plato', 'Aristotle', 'Socrates', 'Confucius', 'Buddha', 'Jesus',
+            'Muhammad', 'Cleopatra', 'Caesar', 'Alexander', 'Washington', 'Roosevelt', 'Kennedy'
+        ];
         
-        // Prepare text
-        const nounsText = 'NOUNS: ' + this.associations.nouns.slice(0, 3).join(', ');
-        const verbsText = 'VERBS: ' + this.associations.verbs.slice(0, 3).join(', ');
+        // Find famous person (first match in nouns)
+        const person = this.associations.nouns.find(noun => famousPeople.includes(noun)) || '';
         
-        // Calculate total text height
-        const totalTextHeight = nameFontSize + assocFontSize * 2 + 8; // Name + 2 lines + spacing
-        const textStartY = screenY + (screenHeight - totalTextHeight) / 2; // Center vertically
+        // Find modal verb (first match in verbs)
+        const modal = this.associations.verbs.find(verb => modalVerbs.includes(verb.toLowerCase())) || '';
         
-        // Add semi-transparent overlay for text readability
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-        ctx.fillRect(screenX + 4, textStartY - 4, screenWidth - 8, totalTextHeight + 8);
+        // Get remaining verbs (excluding modal) - limit to 4, no duplicates
+        const remainingVerbs = this.associations.verbs
+            .filter(verb => !modalVerbs.includes(verb.toLowerCase()))
+            .filter((verb, index, self) => self.indexOf(verb) === index) // Remove duplicates
+            .slice(0, 4); // Limit to 4
         
-        // Building name - bold white, centered
+        // Get remaining nouns (excluding famous person and cities/countries - keep original building nouns)
+        const famousCities = [
+            'Paris', 'London', 'Tokyo', 'New York', 'Rome', 'Berlin', 'Madrid', 'Moscow',
+            'Beijing', 'Cairo', 'Sydney', 'Rio de Janeiro', 'Dubai', 'Bangkok', 'Mumbai',
+            'Istanbul', 'Amsterdam', 'Vienna', 'Prague', 'Athens', 'Stockholm', 'Oslo',
+            'Copenhagen', 'Warsaw', 'Budapest', 'Lisbon', 'Dublin', 'Edinburgh', 'Barcelona', 'Venice'
+        ];
+        const countries = [
+            'France', 'United Kingdom', 'Japan', 'United States', 'Italy', 'Germany', 'Spain', 'Russia',
+            'China', 'Egypt', 'Australia', 'Brazil', 'United Arab Emirates', 'Thailand', 'India',
+            'Turkey', 'Netherlands', 'Austria', 'Czech Republic', 'Greece', 'Sweden', 'Norway',
+            'Denmark', 'Poland', 'Hungary', 'Portugal', 'Ireland', 'Scotland'
+        ];
+        const remainingNouns = this.associations.nouns
+            .filter(noun => 
+                !famousPeople.includes(noun) && !famousCities.includes(noun) && !countries.includes(noun)
+            )
+            .filter((noun, index, self) => self.indexOf(noun) === index) // Remove duplicates
+            .slice(0, 4); // Limit to 4
+        
+        // Generate random month, day, and time of day
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const timesOfDay = ['Morning', 'Afternoon', 'Evening', 'Night', 'Dawn', 'Dusk', 'Midnight', 'Noon'];
+        
+        const randomMonth = months[Math.floor(Math.random() * months.length)];
+        const randomDay = days[Math.floor(Math.random() * days.length)];
+        const randomTime = timesOfDay[Math.floor(Math.random() * timesOfDay.length)];
+        
+        // Calculate optimal font size to fill the building card
+        const padding = 8;
+        const availableHeight = screenHeight - (padding * 2);
+        // Calculate line count: place (1) + person (1) + modal (1) + month (1) + day (1) + time (1) + verbs header (1) + verbs (4) + nouns header (1) + nouns (4) = 16 lines
+        const lineCount = 1 + 1 + 1 + 1 + 1 + 1 + 1 + remainingVerbs.length + 1 + remainingNouns.length;
+        const lineSpacing = 1.2;
+        const maxFontSize = Math.min(availableHeight / (lineCount * lineSpacing), 18 * scale);
+        const fontSize = Math.max(10, maxFontSize);
+        
+        // Prepare text lines with hard returns after each noun and verb
+        const lines = [
+            `place: ${this.name}`,
+            `person: ${person || 'N/A'}`,
+            `modal: ${modal || 'N/A'}`,
+            `month: ${randomMonth}`,
+            `day: ${randomDay}`,
+            `time: ${randomTime}`,
+            `verbs:`
+        ];
+        
+        // Add each verb on its own line
+        remainingVerbs.forEach(verb => {
+            lines.push(`  ${verb}`);
+        });
+        
+        lines.push(`nouns:`);
+        
+        // Add each noun on its own line
+        remainingNouns.forEach(noun => {
+            lines.push(`  ${noun}`);
+        });
+        
+        // Calculate text start position to fill the card
+        const totalTextHeight = fontSize * lineCount * lineSpacing;
+        const textStartY = screenY + (screenHeight - totalTextHeight) / 2 + padding;
+        
+        // Add semi-transparent overlay for text readability (full card)
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+        ctx.fillRect(screenX + 2, screenY + 2, screenWidth - 4, screenHeight - 4);
+        
+        // Draw all text lines
         ctx.fillStyle = '#ffffff';
-        ctx.font = `bold ${nameFontSize}px Arial`;
-        ctx.textAlign = 'center';
+        ctx.font = `bold ${fontSize}px Arial`;
+        ctx.textAlign = 'left';
         ctx.textBaseline = 'top';
-        ctx.fillText(this.name, screenX + screenWidth / 2, textStartY);
         
-        // Associations text - smaller, lighter color
-        ctx.fillStyle = '#e0e0e0';
-        ctx.font = `${assocFontSize}px Arial`;
-        let currentY = textStartY + nameFontSize + 4;
-        ctx.fillText(nounsText, screenX + screenWidth / 2, currentY);
-        currentY += assocFontSize + 2;
-        ctx.fillText(verbsText, screenX + screenWidth / 2, currentY);
+        const leftMargin = screenX + padding + 4;
+        let currentY = textStartY;
+        
+        lines.forEach(line => {
+            ctx.fillText(line, leftMargin, currentY);
+            currentY += fontSize * lineSpacing;
+        });
         
         // Reset alpha
         ctx.globalAlpha = 1;

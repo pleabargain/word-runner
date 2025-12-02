@@ -16,10 +16,17 @@
     - Time frames change every 1000 distance units
 - **Labeled Buildings:** 
     - Buildings appear on both sides of the road with clearly stated names
-    - Each building displays associated nouns and verbs inside the building frame
-    - Examples: Park (NOUNS: Birds, Trees, Grass | VERBS: Play, Walk, Sit, Picnic)
+    - Each building displays enriched vocabulary information inside the building frame:
+        - **place:** Building name
+        - **person:** Random famous person (Einstein, Shakespeare, Mozart, etc.)
+        - **modal:** Random modal verb (can, could, may, might, must, etc.)
+        - **verbs:** Associated action verbs
+        - **nouns:** Associated nouns (excluding famous person and cities)
+    - Building cards fill the entire building frame with maximized font size for readability
     - All building names are shown before repeating (randomized order)
-    - Building types include: Bank, Bookstore, Burger Place, Chinese Restaurant, Coffee Shop, Doctor's Office, Fire Station, Gas Station, Grocery Store, Hair Salon, Hardware Store, Hospital, Hotel, Kindergarten, Library, Museum, Park, Pharmacy, Pizza Place, Police Station, Post Office, Restaurant, School, Theater, Train Station, and more
+    - Building types include:
+        - **Places:** Bank, Bookstore, Burger Place, Chinese Restaurant, Coffee Shop, Doctor's Office, Fire Station, Gas Station, Grocery Store, Gym, Hair Salon, Hardware Store, Hospital, Hotel, Kindergarten, Library, Museum, Park, Pharmacy, Pizza Place, Playground, Police Station, Post Office, Restaurant, School, Theater, Train Station
+        - **Rooms:** Bathroom, Bedroom, Elevator, Hallway, Hotel Lobby, Hotel Spa, Kids Club, Kitchen, Living Room
 - **Controls:** 
     - **Arrow Keys:** Move Left/Right
     - **Space Bar:** Pause/Resume Game
@@ -39,10 +46,16 @@
 
 ## Features
 - **Infinite Scrolling Cityscape:** 3D perspective city environment with buildings on both sides
-- **Building Associations:** Each building displays contextually relevant nouns and verbs
-- **Time Frame System:** Navigate through PAST, PRESENT, and FUTURE blocks
-- **Word Pool System:** Ensures variety in word selection
-- **Building Name Pool:** All building names shown before repeating
+- **Enriched Building Cards:** Each building displays:
+    - Building name (place)
+    - Random famous person from history, science, arts, and politics
+    - Random modal verb for language learning
+    - Contextually relevant verbs and nouns
+    - Full card layout with maximized font size for easy reading
+- **Time Frame System:** Navigate through PAST, PRESENT, and FUTURE blocks with indicator display
+- **Word Pool System:** Ensures variety in word selection with non-repeating pools
+- **Building Name Pool:** All building names shown before repeating (randomized order)
+- **Extensive Vocabulary:** B2 level includes 60+ verbs, 800+ nouns, and 1000+ adjectives
 - **Responsive Design:** Adapts to window size
 
 ## Development

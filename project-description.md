@@ -23,15 +23,19 @@
     - Time frames change every 1000 distance units
 - **Buildings:**
     - Buildings appear on both sides of the road with clearly stated names
-    - Each building displays associated nouns and verbs inside the building frame
-    - Examples: 
-        - Park: NOUNS: Birds, Trees, Grass | VERBS: Play, Walk, Sit, Picnic
-        - Kitchen: NOUNS: Stove, Refrigerator, Sink | VERBS: Cook, Bake, Prepare, Wash
+    - Each building displays enriched vocabulary information in a structured format:
+        - **place:** Building name
+        - **person:** Random famous person (Einstein, Shakespeare, Mozart, Picasso, Newton, etc.)
+        - **modal:** Random modal verb (can, could, may, might, must, shall, should, will, would)
+        - **verbs:** Associated action verbs (excluding modal verb)
+        - **nouns:** Associated nouns (excluding famous person and cities/countries)
+    - Building cards fill the entire building frame with maximized, readable font size
     - Building types include:
-        - **Places:** Bank, Bookstore, Burger Place, Chinese Restaurant, Coffee Shop, Doctor's Office, Fire Station, Gas Station, Grocery Store, Hair Salon, Hardware Store, Hospital, Hotel, Kindergarten, Library, Museum, Park, Pharmacy, Pizza Place, Police Station, Post Office, Restaurant, School, Theater, Train Station
+        - **Places:** Bank, Bookstore, Burger Place, Chinese Restaurant, Coffee Shop, Doctor's Office, Fire Station, Gas Station, Grocery Store, Gym, Hair Salon, Hardware Store, Hospital, Hotel, Kindergarten, Library, Museum, Park, Pharmacy, Pizza Place, Playground, Police Station, Post Office, Restaurant, School, Theater, Train Station
         - **Rooms:** Bathroom, Bedroom, Elevator, Hallway, Hotel Lobby, Hotel Spa, Kids Club, Kitchen, Living Room
     - All building names are shown before repeating (randomized order)
     - Buildings use distinct colors for visual variety
+    - Each building is enriched with educational content (famous people, modal verbs, cities/countries)
 - **Setting:** Infinite cityscape with consistent blue/gray color scheme and distinct building blocks.
 - **Collection:** Collision-based. The character physically runs into words floating in their lane.
 - **Difficulty Levels:** A1 (Beginner) to C2 (Proficiency) with extensive vocabulary pools, especially at B2 level.

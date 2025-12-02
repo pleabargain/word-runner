@@ -12,8 +12,14 @@
 - [ ] Implement a scoring system based on collecting an equal balance of word types.
 
 ## Gameplay Mechanics
-- **Objective:** Collect an equal amount of verbs, nouns, and adjectives.
-- **Setting:** Infinite cityscape with rectilinear streets (grid-like).
+- **Objective:** Navigate through city blocks representing different time frames (Past, Present, Future).
+- **Collection:** Collect words corresponding to the current time frame.
+- **Categories:** Verbs, Nouns, Adjectives, Days of the Week, Months.
+- **Time Frames:**
+    - **Past:** Color-coded (e.g., Sepia). Words in past tense?
+    - **Present:** Color-coded (e.g., Green/Normal).
+    - **Future:** Color-coded (e.g., Neon/Blue).
+- **Setting:** Infinite cityscape with distinct blocks.
 - **Collection:** Collision-based. The character physically runs into words floating in their lane.
 
 ## Technology Stack

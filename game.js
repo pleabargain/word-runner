@@ -87,12 +87,12 @@ const BUILDING_ASSOCIATIONS = {
         verbs: ['Read', 'Browse', 'Purchase', 'Search', 'Recommend', 'Select', 'Buy']
     },
     'Burger Place': {
-        nouns: ['Burger', 'Patty', 'Bun', 'Fries', 'Ketchup', 'Pickle', 'Onion', 'Menu'],
+        nouns: ['Burger', 'bill', 'cash', 'Patty', 'Bun', 'Fries', 'Ketchup', 'Pickle', 'Onion', 'Menu'],
         verbs: ['Order', 'Eat', 'Grill', 'Serve', 'Enjoy', 'Pay', 'Share']
     },
     'Chinese Restaurant': {
-        nouns: ['Noodles', 'Rice', 'Dumpling', 'Sauce', 'Chopstick', 'Menu', 'Table', 'Dish'],
-        verbs: ['Eat', 'Order','pay', 'sit', 'Cook', 'Serve', 'Taste', 'Enjoy', 'Share']
+        nouns: ['Chopstick', 'Dish', 'Dumpling', 'Menu', 'Noodles', 'Rice', 'Sauce', 'Table'],
+        verbs: ['Cook', 'Eat', 'Enjoy', 'Order', 'pay', 'Serve', 'Share', 'sit', 'Taste']
     },
     'City Hall': {
         nouns: ['Mayor', 'Meeting', 'Document', 'Certificate', 'Office', 'Council', 'Law', 'Record'],
@@ -119,7 +119,7 @@ const BUILDING_ASSOCIATIONS = {
         verbs: ['Visit', 'Chat', 'Relax', 'Play', 'Laugh', 'Hang', 'Share']
     },
     'Gas Station': {
-        nouns: ['Gas', 'Pump', 'Fuel', 'Car', 'Nozzle', 'Price', 'Tank', 'Payment'],
+        nouns: ['Gas', 'Pump', 'Fuel', 'toilet', 'Car', 'Nozzle', 'Price', 'Tank', 'Payment'],
         verbs: ['Fill', 'Pay', 'Drive', 'Stop', 'Refuel', 'Check', 'Purchase']
     },
     'Hallway': {
@@ -129,6 +129,10 @@ const BUILDING_ASSOCIATIONS = {
     'Grocery Store': {
         nouns: ['Food', 'Cart', 'Aisle', 'Produce', 'Milk', 'Bread', 'Checkout', 'Bag'],
         verbs: ['Shop', 'Buy', 'Select', 'Compare', 'Pay', 'Load', 'Purchase']
+    },
+    'Gym': {
+        nouns: ['Weights', 'Treadmill', 'Dumbbell', 'Bench', 'Trainer', 'Equipment', 'Exercise', 'Machine'],
+        verbs: ['Exercise', 'Lift', 'Run', 'Train', 'Work Out', 'Stretch', 'Sweat']
     },
     'Hair Salon': {
         nouns: ['Hair', 'Scissors', 'Mirror', 'Chair', 'Shampoo', 'Stylist', 'Cut', 'Style'],
@@ -189,6 +193,10 @@ const BUILDING_ASSOCIATIONS = {
     'Pharmacy': {
         nouns: ['Medicine', 'Prescription', 'Pill', 'Pharmacist', 'Health', 'Vitamin', 'Bandage', 'Advice'],
         verbs: ['Fill', 'Purchase', 'Consult', 'Pick Up', 'Advise', 'Recommend', 'Buy']
+    },
+    'Playground': {
+        nouns: ['Slide', 'Swing', 'Sandbox', 'Monkey Bars', 'Child', 'Toy', 'Bench', 'Equipment'],
+        verbs: ['Play', 'Swing', 'Slide', 'Climb', 'Run', 'Jump', 'Have Fun']
     },
     'Pizza Place': {
         nouns: ['Pizza', 'Slice', 'Crust', 'Topping', 'Cheese', 'Pepperoni', 'Oven', 'Menu'],
@@ -585,6 +593,7 @@ class Game {
             'Friend\'s Place',
             'Gas Station',
             'Grocery Store',
+            'Gym',
             'Hair Salon',
             'Hallway',
             'Hardware Store',
@@ -601,6 +610,7 @@ class Game {
             'Park',
             'Parent\'s Place',
             'Pharmacy',
+            'Playground',
             'Pizza Place',
             'Police Station',
             'Post Office',

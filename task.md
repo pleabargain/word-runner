@@ -17,10 +17,10 @@
     - [x] Implement collision detection
 
 - [ ] **Block Runner Features**
-    - [ ] Implement Time Frame system (Past, Present, Future)
-    - [ ] Implement color-coded city blocks
-    - [ ] Expand Word Data (Days, Months)
-    - [ ] Implement context-aware spawning (Words match time frame?)
+    - [x] Implement Time Frame system (Past, Present, Future)
+    - [x] Implement color-coded city blocks
+    - [x] Expand Word Data (Days, Months)
+    - [x] Implement context-aware spawning (Words match time frame?)
     - [x] Implement non-repeating word pool system
 
 - [ ] **Game Logic**

@@ -74,6 +74,14 @@ const BUILDING_ASSOCIATIONS = {
         nouns: ['Money', 'Account', 'Loan', 'Deposit', 'Teller', 'Vault', 'ATM', 'Check'],
         verbs: ['Deposit', 'Withdraw', 'Save', 'Borrow', 'Invest', 'Transfer', 'Count']
     },
+    'Bathroom': {
+        nouns: ['Sink', 'Mirror', 'Towel', 'Shower', 'Toilet', 'Soap', 'Toothbrush', 'Toothpaste'],
+        verbs: ['Wash', 'Shower', 'Brush', 'Flush', 'Dry', 'Clean', 'Use']
+    },
+    'Bedroom': {
+        nouns: ['Bed', 'Pillow', 'Blanket', 'Dresser', 'Closet', 'Lamp', 'Window', 'Nightstand'],
+        verbs: ['Sleep', 'Rest', 'Change', 'Dress', 'Wake', 'Dream', 'Relax']
+    },
     'Bookstore': {
         nouns: ['Book', 'Novel', 'Magazine', 'Shelf', 'Author', 'Story', 'Page', 'Cover'],
         verbs: ['Read', 'Browse', 'Purchase', 'Search', 'Recommend', 'Select', 'Buy']
@@ -98,6 +106,10 @@ const BUILDING_ASSOCIATIONS = {
         nouns: ['Patient', 'Medicine', 'Prescription', 'Stethoscope', 'Examination', 'Chart', 'Appointment', 'Diagnosis'],
         verbs: ['Examine', 'Diagnose', 'Prescribe', 'Treat', 'Consult', 'Check', 'Heal']
     },
+    'Elevator': {
+        nouns: ['Button', 'Floor', 'Door', 'Panel', 'Bell', 'Light', 'Mirror', 'Handrail'],
+        verbs: ['Press', 'Ride', 'Wait', 'Enter', 'Exit', 'Go Up', 'Go Down']
+    },
     'Fire Station': {
         nouns: ['Fire', 'Truck', 'Hose', 'Ladder', 'Helmet', 'Alarm', 'Rescue', 'Emergency'],
         verbs: ['Rescue', 'Extinguish', 'Respond', 'Climb', 'Save', 'Rush', 'Help']
@@ -109,6 +121,10 @@ const BUILDING_ASSOCIATIONS = {
     'Gas Station': {
         nouns: ['Gas', 'Pump', 'Fuel', 'Car', 'Nozzle', 'Price', 'Tank', 'Payment'],
         verbs: ['Fill', 'Pay', 'Drive', 'Stop', 'Refuel', 'Check', 'Purchase']
+    },
+    'Hallway': {
+        nouns: ['Door', 'Wall', 'Floor', 'Light', 'Picture', 'Runner', 'Carpet', 'Corridor'],
+        verbs: ['Walk', 'Pass', 'Enter', 'Exit', 'Cross', 'Move', 'Travel']
     },
     'Grocery Store': {
         nouns: ['Food', 'Cart', 'Aisle', 'Produce', 'Milk', 'Bread', 'Checkout', 'Bag'],
@@ -130,13 +146,33 @@ const BUILDING_ASSOCIATIONS = {
         nouns: ['Room', 'Key', 'Lobby', 'Suite', 'Guest', 'Reception', 'Luggage', 'Service'],
         verbs: ['Check In', 'Stay', 'Rest', 'Reserve', 'Check Out', 'Unpack', 'Relax']
     },
+    'Hotel Lobby': {
+        nouns: ['Reception', 'Desk', 'Sofa', 'Luggage', 'Guest', 'Bell', 'Elevator', 'Concierge'],
+        verbs: ['Check In', 'Wait', 'Sit', 'Meet', 'Ask', 'Register', 'Relax']
+    },
+    'Hotel Spa': {
+        nouns: ['Massage', 'Treatment', 'Towel', 'Robes', 'Steam', 'Sauna', 'Therapist', 'Relaxation'],
+        verbs: ['Relax', 'Massage', 'Unwind', 'Treat', 'Pamper', 'Enjoy', 'Book']
+    },
     'Kindergarten': {
         nouns: ['Child', 'Toy', 'Teacher', 'Playground', 'Crayon', 'Story', 'Snack', 'Activity'],
         verbs: ['Play', 'Learn', 'Color', 'Sing', 'Read', 'Nap', 'Share']
     },
+    'Kids Club': {
+        nouns: ['Game', 'Toy', 'Activity', 'Playground', 'Friend', 'Craft', 'Snack', 'Supervisor'],
+        verbs: ['Play', 'Have Fun', 'Make', 'Create', 'Socialize', 'Enjoy', 'Participate']
+    },
+    'Kitchen': {
+        nouns: ['Stove', 'Refrigerator', 'Sink', 'Counter', 'Dish', 'Pot', 'Pan', 'Utensil'],
+        verbs: ['Cook', 'Bake', 'Prepare', 'Wash', 'Eat', 'Clean', 'Store']
+    },
     'Library': {
         nouns: ['Book', 'Shelf', 'Quiet', 'Study', 'Card', 'Librarian', 'Reading', 'Knowledge'],
         verbs: ['Read', 'Borrow', 'Study', 'Research', 'Return', 'Browse', 'Learn']
+    },
+    'Living Room': {
+        nouns: ['Sofa', 'TV', 'Coffee Table', 'Couch', 'Remote', 'Magazine', 'Lamp', 'Carpet'],
+        verbs: ['Relax', 'Watch', 'Sit', 'Read', 'Entertain', 'Chat', 'Unwind']
     },
     'Museum': {
         nouns: ['Art', 'Exhibit', 'Painting', 'Sculpture', 'Gallery', 'History', 'Tour', 'Display'],
@@ -536,22 +572,31 @@ class Game {
         // Building names pool - shuffled and used one at a time
         this.buildingNames = [
             'Bank',
+            'Bathroom',
+            'Bedroom',
             'Bookstore',
             'Burger Place',
             'Chinese Restaurant',
             'City Hall',
             'Coffee Shop',
             'Doctor\'s Office',
+            'Elevator',
             'Fire Station',
             'Friend\'s Place',
             'Gas Station',
             'Grocery Store',
             'Hair Salon',
+            'Hallway',
             'Hardware Store',
             'Hospital',
             'Hotel',
+            'Hotel Lobby',
+            'Hotel Spa',
             'Kindergarten',
+            'Kids Club',
+            'Kitchen',
             'Library',
+            'Living Room',
             'Museum',
             'Park',
             'Parent\'s Place',

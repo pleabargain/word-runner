@@ -1,34 +1,70 @@
 // https://github.com/pleabargain/word-runner
 const WORD_DATA = {
     A1: {
-        verbs: ['Run', 'Jump', 'Eat', 'Sleep', 'Walk'],
+        verbs: {
+            past: ['Ran', 'Jumped', 'Ate', 'Slept', 'Walked'],
+            present: ['Run', 'Jump', 'Eat', 'Sleep', 'Walk'],
+            future: ['Will Run', 'Will Jump', 'Will Eat', 'Will Sleep', 'Will Walk']
+        },
         nouns: ['Cat', 'Dog', 'Car', 'House', 'Tree'],
-        adjectives: ['Big', 'Small', 'Good', 'Bad', 'Red']
+        adjectives: ['Big', 'Small', 'Good', 'Bad', 'Red'],
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     },
     A2: {
-        verbs: ['Travel', 'Cook', 'Study', 'Drive', 'Swim'],
+        verbs: {
+            past: ['Traveled', 'Cooked', 'Studied', 'Drove', 'Swam'],
+            present: ['Travel', 'Cook', 'Study', 'Drive', 'Swim'],
+            future: ['Will Travel', 'Will Cook', 'Will Study', 'Will Drive', 'Will Swim']
+        },
         nouns: ['Ticket', 'Kitchen', 'School', 'Road', 'Pool'],
-        adjectives: ['Busy', 'Quiet', 'Cheap', 'Expensive', 'Clean']
+        adjectives: ['Busy', 'Quiet', 'Cheap', 'Expensive', 'Clean'],
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     },
     B1: {
-        verbs: ['Manage', 'Develop', 'Create', 'Design', 'Solve'],
+        verbs: {
+            past: ['Managed', 'Developed', 'Created', 'Designed', 'Solved'],
+            present: ['Manage', 'Develop', 'Create', 'Design', 'Solve'],
+            future: ['Will Manage', 'Will Develop', 'Will Create', 'Will Design', 'Will Solve']
+        },
         nouns: ['Project', 'System', 'Idea', 'Plan', 'Goal'],
-        adjectives: ['Creative', 'Effective', 'Simple', 'Complex', 'Real']
+        adjectives: ['Creative', 'Effective', 'Simple', 'Complex', 'Real'],
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     },
     B2: {
-        verbs: ['Analyze', 'Evaluate', 'Implement', 'Negotiate', 'Adapt'],
+        verbs: {
+            past: ['Analyzed', 'Evaluated', 'Implemented', 'Negotiated', 'Adapted'],
+            present: ['Analyze', 'Evaluate', 'Implement', 'Negotiate', 'Adapt'],
+            future: ['Will Analyze', 'Will Evaluate', 'Will Implement', 'Will Negotiate', 'Will Adapt']
+        },
         nouns: ['Strategy', 'Resource', 'Concept', 'Theory', 'Method'],
-        adjectives: ['Efficient', 'Reliable', 'Significant', 'Potential', 'Specific']
+        adjectives: ['Efficient', 'Reliable', 'Significant', 'Potential', 'Specific'],
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     },
     C1: {
-        verbs: ['Facilitate', 'Synthesize', 'Validate', 'Integrate', 'Advocate'],
+        verbs: {
+            past: ['Facilitated', 'Synthesized', 'Validated', 'Integrated', 'Advocated'],
+            present: ['Facilitate', 'Synthesize', 'Validate', 'Integrate', 'Advocate'],
+            future: ['Will Facilitate', 'Will Synthesize', 'Will Validate', 'Will Integrate', 'Will Advocate']
+        },
         nouns: ['Paradigm', 'Infrastructure', 'Hypothesis', 'Phenomenon', 'Consensus'],
-        adjectives: ['Comprehensive', 'Ambiguous', 'Coherent', 'Intrinsic', 'Empirical']
+        adjectives: ['Comprehensive', 'Ambiguous', 'Coherent', 'Intrinsic', 'Empirical'],
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     },
     C2: {
-        verbs: ['Exacerbate', 'Mitigate', 'Substantiate', 'Elucidate', 'Disseminate'],
+        verbs: {
+            past: ['Exacerbated', 'Mitigated', 'Substantiated', 'Elucidated', 'Disseminated'],
+            present: ['Exacerbate', 'Mitigate', 'Substantiate', 'Elucidate', 'Disseminate'],
+            future: ['Will Exacerbate', 'Will Mitigate', 'Will Substantiate', 'Will Elucidate', 'Will Disseminate']
+        },
         nouns: ['Cacophony', 'Epiphany', 'Ubiquity', 'Vicissitude', 'Serendipity'],
-        adjectives: ['Esoteric', 'Ephemeral', 'Ineffable', 'Ubiquitous', 'Pernicious']
+        adjectives: ['Esoteric', 'Ephemeral', 'Ineffable', 'Ubiquitous', 'Pernicious'],
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
 };
 
@@ -42,9 +78,11 @@ class WordPool {
         // Initialize pools for each difficulty level and word type
         Object.keys(WORD_DATA).forEach(difficulty => {
             this.pools[difficulty] = {
-                verbs: [],
+                verbs: { past: [], present: [], future: [] },
                 nouns: [],
-                adjectives: []
+                adjectives: [],
+                days: [],
+                months: []
             };
         });
     }

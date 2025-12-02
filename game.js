@@ -68,6 +68,114 @@ const WORD_DATA = {
     }
 };
 
+// Building associations - verbs and nouns associated with each place
+const BUILDING_ASSOCIATIONS = {
+    'Bank': {
+        nouns: ['Money', 'Account', 'Loan', 'Deposit', 'Teller', 'Vault', 'ATM', 'Check'],
+        verbs: ['Deposit', 'Withdraw', 'Save', 'Borrow', 'Invest', 'Transfer', 'Count']
+    },
+    'Bookstore': {
+        nouns: ['Book', 'Novel', 'Magazine', 'Shelf', 'Author', 'Story', 'Page', 'Cover'],
+        verbs: ['Read', 'Browse', 'Purchase', 'Search', 'Recommend', 'Select', 'Buy']
+    },
+    'Chinese Restaurant': {
+        nouns: ['Noodles', 'Rice', 'Dumpling', 'Sauce', 'Chopstick', 'Menu', 'Table', 'Dish'],
+        verbs: ['Eat', 'Order', 'Cook', 'Serve', 'Taste', 'Enjoy', 'Share']
+    },
+    'City Hall': {
+        nouns: ['Mayor', 'Meeting', 'Document', 'Certificate', 'Office', 'Council', 'Law', 'Record'],
+        verbs: ['Govern', 'Meet', 'Decide', 'Vote', 'Register', 'Apply', 'Attend']
+    },
+    'Coffee Shop': {
+        nouns: ['Coffee', 'Espresso', 'Latte', 'Cup', 'Bean', 'Barista', 'Pastry', 'Table'],
+        verbs: ['Drink', 'Order', 'Sip', 'Relax', 'Meet', 'Work', 'Enjoy']
+    },
+    'Doctor\'s Office': {
+        nouns: ['Patient', 'Medicine', 'Prescription', 'Stethoscope', 'Examination', 'Chart', 'Appointment', 'Diagnosis'],
+        verbs: ['Examine', 'Diagnose', 'Prescribe', 'Treat', 'Consult', 'Check', 'Heal']
+    },
+    'Fire Station': {
+        nouns: ['Fire', 'Truck', 'Hose', 'Ladder', 'Helmet', 'Alarm', 'Rescue', 'Emergency'],
+        verbs: ['Rescue', 'Extinguish', 'Respond', 'Climb', 'Save', 'Rush', 'Help']
+    },
+    'Friend\'s Place': {
+        nouns: ['Friend', 'Couch', 'TV', 'Snack', 'Game', 'Conversation', 'Memory', 'Visit'],
+        verbs: ['Visit', 'Chat', 'Relax', 'Play', 'Laugh', 'Hang', 'Share']
+    },
+    'Gas Station': {
+        nouns: ['Gas', 'Pump', 'Fuel', 'Car', 'Nozzle', 'Price', 'Tank', 'Payment'],
+        verbs: ['Fill', 'Pay', 'Drive', 'Stop', 'Refuel', 'Check', 'Purchase']
+    },
+    'Grocery Store': {
+        nouns: ['Food', 'Cart', 'Aisle', 'Produce', 'Milk', 'Bread', 'Checkout', 'Bag'],
+        verbs: ['Shop', 'Buy', 'Select', 'Compare', 'Pay', 'Load', 'Purchase']
+    },
+    'Hair Salon': {
+        nouns: ['Hair', 'Scissors', 'Mirror', 'Chair', 'Shampoo', 'Stylist', 'Cut', 'Style'],
+        verbs: ['Cut', 'Style', 'Wash', 'Color', 'Trim', 'Dry', 'Book']
+    },
+    'Hardware Store': {
+        nouns: ['Tool', 'Nail', 'Screw', 'Hammer', 'Paint', 'Lumber', 'Drill', 'Wrench'],
+        verbs: ['Buy', 'Fix', 'Build', 'Repair', 'Install', 'Measure', 'Select']
+    },
+    'Hospital': {
+        nouns: ['Patient', 'Nurse', 'Doctor', 'Room', 'Medicine', 'Surgery', 'Emergency', 'Bed'],
+        verbs: ['Treat', 'Operate', 'Heal', 'Care', 'Recover', 'Admit', 'Discharge']
+    },
+    'Hotel': {
+        nouns: ['Room', 'Key', 'Lobby', 'Suite', 'Guest', 'Reception', 'Luggage', 'Service'],
+        verbs: ['Check In', 'Stay', 'Rest', 'Reserve', 'Check Out', 'Unpack', 'Relax']
+    },
+    'Kindergarten': {
+        nouns: ['Child', 'Toy', 'Teacher', 'Playground', 'Crayon', 'Story', 'Snack', 'Activity'],
+        verbs: ['Play', 'Learn', 'Color', 'Sing', 'Read', 'Nap', 'Share']
+    },
+    'Library': {
+        nouns: ['Book', 'Shelf', 'Quiet', 'Study', 'Card', 'Librarian', 'Reading', 'Knowledge'],
+        verbs: ['Read', 'Borrow', 'Study', 'Research', 'Return', 'Browse', 'Learn']
+    },
+    'Museum': {
+        nouns: ['Art', 'Exhibit', 'Painting', 'Sculpture', 'Gallery', 'History', 'Tour', 'Display'],
+        verbs: ['View', 'Explore', 'Learn', 'Admire', 'Tour', 'Discover', 'Appreciate']
+    },
+    'Park': {
+        nouns: ['Birds', 'Trees', 'Grass', 'Bench', 'Path', 'Playground', 'Flowers', 'Picnic'],
+        verbs: ['Play', 'Walk', 'Sit', 'Picnic', 'Relax', 'Exercise', 'Enjoy']
+    },
+    'Parent\'s Place': {
+        nouns: ['Family', 'Home', 'Memory', 'Photo', 'Meal', 'Conversation', 'Love', 'Visit'],
+        verbs: ['Visit', 'Eat', 'Talk', 'Hug', 'Remember', 'Share', 'Relax']
+    },
+    'Pharmacy': {
+        nouns: ['Medicine', 'Prescription', 'Pill', 'Pharmacist', 'Health', 'Vitamin', 'Bandage', 'Advice'],
+        verbs: ['Fill', 'Purchase', 'Consult', 'Pick Up', 'Advise', 'Recommend', 'Buy']
+    },
+    'Police Station': {
+        nouns: ['Officer', 'Badge', 'Report', 'Crime', 'Evidence', 'Patrol', 'Law', 'Safety'],
+        verbs: ['Arrest', 'Investigate', 'Protect', 'Report', 'Question', 'Serve', 'Enforce']
+    },
+    'Post Office': {
+        nouns: ['Mail', 'Package', 'Stamp', 'Letter', 'Envelope', 'Box', 'Address', 'Delivery'],
+        verbs: ['Send', 'Mail', 'Ship', 'Receive', 'Package', 'Post', 'Deliver']
+    },
+    'Restaurant': {
+        nouns: ['Food', 'Menu', 'Waiter', 'Table', 'Dish', 'Meal', 'Order', 'Bill'],
+        verbs: ['Eat', 'Order', 'Dine', 'Taste', 'Enjoy', 'Reserve', 'Pay']
+    },
+    'School': {
+        nouns: ['Student', 'Teacher', 'Classroom', 'Desk', 'Book', 'Lesson', 'Homework', 'Test'],
+        verbs: ['Learn', 'Study', 'Teach', 'Read', 'Write', 'Attend', 'Graduate']
+    },
+    'Theater': {
+        nouns: ['Stage', 'Actor', 'Play', 'Audience', 'Ticket', 'Curtain', 'Performance', 'Drama'],
+        verbs: ['Watch', 'Perform', 'Applaud', 'Act', 'Entertain', 'Attend', 'Enjoy']
+    },
+    'Train Station': {
+        nouns: ['Train', 'Ticket', 'Platform', 'Schedule', 'Track', 'Passenger', 'Luggage', 'Departure'],
+        verbs: ['Board', 'Depart', 'Arrive', 'Wait', 'Travel', 'Purchase', 'Ride']
+    }
+};
+
 class WordPool {
     constructor() {
         this.pools = {};
@@ -243,6 +351,9 @@ class Building {
         this.side = side; // 'left' or 'right'
         this.name = name;
         
+        // Get associated verbs and nouns for this building
+        this.associations = BUILDING_ASSOCIATIONS[name] || { nouns: [], verbs: [] };
+        
         // Building dimensions
         this.width = 200 + Math.random() * 150; // 200-350 units wide
         this.height = 300 + Math.random() * 200; // 300-500 units tall
@@ -308,31 +419,51 @@ class Building {
         ctx.globalAlpha = 1;
         ctx.strokeRect(screenX, screenY, screenWidth, screenHeight);
 
-        // Draw building label - bold and easy to read
-        const fontSize = Math.max(14, Math.min(26, 32 * scale));
-        ctx.font = `bold ${fontSize}px Arial`;
+        // Draw building label with associations - bold and easy to read
+        const nameFontSize = Math.max(14, Math.min(26, 32 * scale));
+        const assocFontSize = Math.max(10, Math.min(18, 22 * scale));
+        ctx.font = `bold ${nameFontSize}px Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         
-        // Label background for readability with stronger contrast
-        const labelY = screenY - fontSize - 8;
-        const textMetrics = ctx.measureText(this.name);
-        const labelWidth = textMetrics.width + 16;
-        const labelHeight = fontSize + 8;
+        // Calculate label dimensions
+        const nameMetrics = ctx.measureText(this.name);
+        const nounsText = 'NOUNS: ' + this.associations.nouns.slice(0, 3).join(', ');
+        const verbsText = 'VERBS: ' + this.associations.verbs.slice(0, 3).join(', ');
+        
+        ctx.font = `${assocFontSize}px Arial`;
+        const nounsMetrics = ctx.measureText(nounsText);
+        const verbsMetrics = ctx.measureText(verbsText);
+        
+        const maxTextWidth = Math.max(nameMetrics.width, nounsMetrics.width, verbsMetrics.width);
+        const labelWidth = maxTextWidth + 20;
+        const labelHeight = nameFontSize + assocFontSize * 2 + 20; // Name + 2 lines of associations + padding
+        
+        // Position label above building
+        const labelY = screenY - labelHeight - 8;
+        const labelX = screenX + screenWidth / 2 - labelWidth / 2;
         
         // Dark background with border for better readability
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-        ctx.fillRect(screenX + screenWidth / 2 - labelWidth / 2, labelY, labelWidth, labelHeight);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+        ctx.fillRect(labelX, labelY, labelWidth, labelHeight);
         
         // White border around label
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
-        ctx.strokeRect(screenX + screenWidth / 2 - labelWidth / 2, labelY, labelWidth, labelHeight);
+        ctx.strokeRect(labelX, labelY, labelWidth, labelHeight);
         
-        // Label text - bold white for maximum readability
+        // Building name - bold white
         ctx.fillStyle = '#ffffff';
-        ctx.font = `bold ${fontSize}px Arial`;
-        ctx.fillText(this.name, screenX + screenWidth / 2, labelY + 4);
+        ctx.font = `bold ${nameFontSize}px Arial`;
+        ctx.fillText(this.name, screenX + screenWidth / 2, labelY + 6);
+        
+        // Associations text - smaller, lighter color
+        ctx.fillStyle = '#cccccc';
+        ctx.font = `${assocFontSize}px Arial`;
+        let currentY = labelY + nameFontSize + 8;
+        ctx.fillText(nounsText, screenX + screenWidth / 2, currentY);
+        currentY += assocFontSize + 4;
+        ctx.fillText(verbsText, screenX + screenWidth / 2, currentY);
         
         // Reset alpha
         ctx.globalAlpha = 1;

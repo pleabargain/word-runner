@@ -62,6 +62,49 @@
 This project is built using HTML5, CSS3, and Vanilla JavaScript.
 
 ## Setup
-1. Clone the repository.
-2. Open `index.html` in your browser.
-3. Select your difficulty level and click "Start Game".
+
+### Prerequisites
+- A modern web browser (Chrome, Firefox, Edge, Safari, or Opera)
+- No additional software or dependencies required - the game runs entirely in the browser
+
+### Running the Game
+
+**Option 1: Direct File Opening**
+1. Clone or download the repository to your local machine
+2. Navigate to the project folder
+3. Double-click `index.html` to open it in your default browser
+   - **Note:** Some browsers may have security restrictions when opening local files. If the game doesn't load, use Option 2 instead.
+
+**Option 2: Local Web Server (Recommended)**
+1. Clone or download the repository to your local machine
+2. Open a terminal/command prompt in the project folder
+3. Start a local web server using one of these methods:
+   - **Python 3:** `python -m http.server 8000`
+   - **Python 2:** `python -m SimpleHTTPServer 8000`
+   - **Node.js:** `npx http-server` (requires Node.js installed)
+   - **PHP:** `php -S localhost:8000`
+4. Open your browser and navigate to `http://localhost:8000`
+5. The game should now load properly
+
+**Option 3: Online Hosting**
+1. Upload all files to a web hosting service (GitHub Pages, Netlify, Vercel, etc.)
+2. Access the game through the hosted URL
+
+### Starting the Game
+1. Once the game loads, you'll see the start screen
+2. Select your difficulty level from the dropdown menu:
+   - **A1:** Beginner - Basic vocabulary
+   - **A2:** Elementary - Simple words
+   - **B1:** Intermediate - Moderate complexity
+   - **B2:** Upper-intermediate - Extensive vocabulary (60+ verbs, 800+ nouns, 1000+ adjectives)
+   - **C1:** Advanced - Complex vocabulary
+   - **C2:** Proficiency - Expert-level vocabulary
+3. Click the "Start Game" button
+4. Use arrow keys to move left/right and collect words
+5. Press Spacebar to pause/resume the game
+
+### Troubleshooting
+- **Game doesn't load:** Try using a local web server (Option 2) instead of opening the file directly
+- **Buildings don't appear:** Make sure all files (`game.js`, `style.css`, `index.html`) are in the same folder
+- **Controls don't work:** Click on the game canvas to ensure it has focus
+- **Performance issues:** Try closing other browser tabs or using a more modern browser

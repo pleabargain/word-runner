@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Main Canvas */
+#voxelCanvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* UI Overlay */
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Panels */
+.panel {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+    pointer-events: auto;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.5);
+}
+
+.panel h3 {
+    margin-bottom: 10px;
+    color: #4CAF50;
+    font-size: 18px;
+}
+
+.panel p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Controls Panel */
+#controls-panel {
+    top: 20px;
+    left: 20px;
+}
+
+#mode-text {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+/* Save/Load Panel */
+#saveload-panel {
+    bottom: 20px;
+    left: 20px;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Mini-map Container */
+#minimap-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #FF6B6B;
+    pointer-events: auto;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+}
+
+#minimap-container h4 {
+    color: #FF6B6B;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#minimap {
+    display: block;
+    width: 250px;
+    height: 250px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #1a1a1a;
+}
+
+/* Minimap Tooltip */
+#minimap-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.95);
+    color: #FFD700;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    pointer-events: none;
+    display: none;
+    white-space: nowrap;
+    border: 1px solid #FFD700;
+    z-index: 1000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .panel {
+        padding: 10px 15px;
+    }
+    
+    .panel h3 {
+        font-size: 16px;
+    }
+    
+    .panel p {
+        font-size: 12px;
+    }
+    
+    #minimap {
+        width: 180px;
+        height: 180px;
+    }
+}

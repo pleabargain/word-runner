@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voxel Cityscape Explorer</title>
+    <link rel="stylesheet" href="voxel-city.css">
+</head>
+
+<body>
+    <!-- Main 3D Canvas -->
+    <canvas id="voxelCanvas"></canvas>
+
+    <!-- UI Overlay -->
+    <div id="ui-overlay">
+        <!-- Controls Info -->
+        <div id="controls-panel" class="panel">
+            <h3>🎮 Controls</h3>
+            <p><strong>Arrow Keys:</strong> Move</p>
+            <p><strong>V Key:</strong> Toggle Camera</p>
+            <p><strong>ESC:</strong> Reset View</p>
+            <p id="camera-mode">Mode: <span id="mode-text">First-Person</span></p>
+        </div>
+
+        <!-- Save/Load Panel -->
+        <div id="saveload-panel" class="panel">
+            <h3>💾 City Data</h3>
+            <button id="save-btn" class="btn">Save City</button>
+            <button id="load-btn" class="btn">Load City</button>
+            <button id="download-btn" class="btn">Download JSON</button>
+            <input type="file" id="upload-input" accept=".json" style="display: none;">
+            <button id="upload-btn" class="btn">Upload JSON</button>
+        </div>
+
+        <!-- Mini-map -->
+        <div id="minimap-container">
+            <h4>🗺️ City Map</h4>
+            <canvas id="minimap"></canvas>
+            <div id="minimap-tooltip"></div>
+        </div>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Building Associations Data -->
+    <script src="building-data.js"></script>
+
+    <!-- Main Application -->
+    <script src="voxel-city.js"></script>
+</body>
+
+</html>

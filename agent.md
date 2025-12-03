@@ -6,6 +6,7 @@ This file defines the operating rules for the agent in this workspace.
 1. **Clarification Protocol**
    - Ask a multiple choice question when seeking clarification from the user.
    - Ask only one question at a time.
+   - document all questions and answers for future reference
 
 2. **Timestamping**
    - Date stamp using ISO time stamp (e.g., 2025-12-02T13:53:34+04:00).
